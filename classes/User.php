@@ -9,7 +9,9 @@ class User {
         $masterKey = bin2hex(random_bytes(32));
         $encKey = Encryptor::encrypt($masterKey, $password);
 
-        $stmt = $pdo->prepare("INSERT INTO users (username, password_hash, master_key_encrypted) VALUES (?, ?, ?)");
+        $stmt = $pdo->prepare(
+            "INSERT INTO users (username, password_hash, master_key_encrypted) VALUES (?, ?, ?)"
+        );
         return $stmt->execute([$username, $hash, $encKey]);
     }
 
@@ -20,10 +22,12 @@ class User {
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password_hash'])) {
+            // RAKTAS iššifruojamas su plain slaptažodžiu
             $masterKey = Encryptor::decrypt($user['master_key_encrypted'], $password);
-            session_start();
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
+
+            // session_start() iškviečiamas puslapyje, o ne čia
+            $_SESSION['user_id']   = $user['id'];
+            $_SESSION['username']  = $user['username'];
             $_SESSION['master_key'] = $masterKey;
             return true;
         }
