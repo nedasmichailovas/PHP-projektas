@@ -6,12 +6,14 @@ class PasswordVault {
     private $masterKey;
 
     public function __construct() {
-        session_start();
+        // session_start() čia nekviečiame, nes jis jau yra puslapyje
         $this->masterKey = $_SESSION['master_key'] ?? null;
     }
 
     public function addPassword($site_name, $password, $notes = '') {
-        if (!$this->masterKey) return false;
+        if (!$this->masterKey) {
+            return false;
+        }
         
         $encrypted = Encryptor::encrypt($password, $this->masterKey);
         $pdo = Database::getConn();
@@ -28,7 +30,9 @@ class PasswordVault {
     }
 
     public function decryptPassword($encrypted) {
-        if (!$this->masterKey) return "Klaida dekoduojant";
+        if (!$this->masterKey) {
+            return "Klaida dekoduojant";
+        }
         return Encryptor::decrypt($encrypted, $this->masterKey);
     }
 }
