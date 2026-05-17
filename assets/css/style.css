@@ -1,32 +1,82 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 40px;
-    background-color: #f8f9fa;
+    background-color: #f4f6f9;
+    color: #333;
+    margin: 30px;
+    line-height: 1.6;
 }
-h2 { color: #333; }
-input, button, textarea {
+
+h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+input, textarea, button {
     padding: 10px;
     margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     font-size: 16px;
 }
+
+input:focus, textarea:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
 button {
-    background-color: #007bff;
+    background-color: #3498db;
     color: white;
     border: none;
     cursor: pointer;
-    padding: 10px 16px;
+    font-weight: bold;
 }
+
 button:hover {
-    background-color: #0056b3;
+    background-color: #2980b9;
 }
-a { text-decoration: none; color: #007bff; }
+
+a {
+    color: #2980b9;
+}
+
+a:hover {
+    color: #1f5f8c;
+}
+
+/* Spalvoti pranešimai */
+.success {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.error {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
 table {
     border-collapse: collapse;
     width: 100%;
     max-width: 900px;
+    margin: 20px 0;
 }
+
 th, td {
+    padding: 12px;
     border: 1px solid #ddd;
-    padding: 10px;
     text-align: left;
+}
+
+th {
+    background-color: #ecf0f1;
+}
+
+form {
+    max-width: 500px;
+}
+
+/* Kad nebūtų per daug centre */
+.container {
+    max-width: 700px;
 }
