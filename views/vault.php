@@ -7,24 +7,33 @@ $passwords = $vault->getPasswords();
 ?>
 <!DOCTYPE html>
 <html lang="lt">
-<head><meta charset="UTF-8"><title>Saugykla</title></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Saugykla</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
 <body>
-<h2>Mano slaptažodžiai</h2>
-<a href="add_password.php">+ Pridėti naują</a><br><br>
+    <h2>Mano Slaptažodžių Saugykla</h2>
+    <p><a href="add_password.php">+ Pridėti naują slaptažodį</a></p>
 
-<table border="1" cellpadding="8">
-    <tr><th>Svetainė</th><th>Slaptažodis</th><th>Data</th></tr>
-    <?php foreach ($passwords as $p): ?>
-    <tr>
-        <td><?= htmlspecialchars($p['site_name']) ?></td>
-        <td>
-            <button onclick="alert('<?= $vault->decryptPassword($p['encrypted_password']) ?>')">Rodyti slaptažodį</button>
-        </td>
-        <td><?= $p['created_at'] ?></td>
-    </tr>
-    <?php endforeach; ?>
-</table>
+    <table>
+        <tr>
+            <th>Svetainė</th>
+            <th>Slaptažodis</th>
+            <th>Data</th>
+        </tr>
+        <?php foreach ($passwords as $p): ?>
+        <tr>
+            <td><?= htmlspecialchars($p['site_name']) ?></td>
+            <td>
+                <button onclick="alert('<?= htmlspecialchars($vault->decryptPassword($p['encrypted_password'])) ?>')">Rodyti</button>
+            </td>
+            <td><?= $p['created_at'] ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
 
-<br><a href="dashboard.php">Grįžti</a>
+    <br>
+    <a href="dashboard.php">← Grįžti</a>
 </body>
 </html>
